@@ -7,25 +7,33 @@ CFLAGS      = -Wall -Wextra -Werror -Iinclude
 
 LDFLAGS     = -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl
 
-SRCS_CPP    = src/main.cpp \
-				src/scop.cpp
-SRCS_C      = src/glad.c
+SRC_DIR     = src
+OBJ_DIR     = obj
 
-OBJS        = $(SRCS_CPP:.cpp=.o) $(SRCS_C:.c=.o)
+SRCS_CPP    =   $(SRC_DIR)/main.cpp \
+                $(SRC_DIR)/Mesh.cpp \
+				$(SRC_DIR)/App.cpp
+
+SRCS_C      =   $(SRC_DIR)/glad.c
+
+OBJS        =   $(SRCS_CPP:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o) \
+                $(SRCS_C:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CXX) $(OBJS) $(LDFLAGS) -o $(NAME)
 
-%.o: %.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-%.o: %.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
