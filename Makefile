@@ -12,7 +12,9 @@ OBJ_DIR     = obj
 
 SRCS_CPP    =   $(SRC_DIR)/main.cpp \
                 $(SRC_DIR)/Mesh.cpp \
-				$(SRC_DIR)/App.cpp
+				$(SRC_DIR)/App.cpp \
+				$(SRC_DIR)/Mat4.cpp \
+				$(SRC_DIR)/Shader.cpp \
 
 SRCS_C      =   $(SRC_DIR)/glad.c
 
