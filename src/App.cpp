@@ -6,7 +6,7 @@
 /*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 16:56:11 by antbonin          #+#    #+#             */
-/*   Updated: 2026/10/19 17:08:13 by antbonin         ###   ########.fr       */
+/*   Updated: 2026/10/21 18:56:00 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ App::App(int w, int h, const std::string &title): width(w), height(h), deltaTime
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-
+	glfwSetWindowUserPointer(window, this);
+	glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
 	glEnable(GL_DEPTH_TEST);
 }
@@ -50,6 +52,14 @@ App::~App()
 {
 	glfwDestroyWindow(window);
 	glfwTerminate();
+}
+
+void App::framebufferSizeCallback(GLFWwindow* window, int w, int h)
+{
+	App* self = static_cast<App*>(glfwGetWindowUserPointer(window));
+	self->width = w;
+	self->height = h;
+	glViewport(0, 0, w, h);
 }
 
 bool	App::isRunning() const
@@ -86,5 +96,7 @@ float App::getDeltaTime() const
 
 float App::getAspect() const
 {
+	if (height == 0)
+		return 1.0f;
 	return (float)width / (float)height;
 }
