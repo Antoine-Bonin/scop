@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoine <antoine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 09:44:35 by antbonin          #+#    #+#             */
-/*   Updated: 2026/10/20 18:57:15 by antoine          ###   ########.fr       */
+/*   Updated: 2026/10/21 18:51:42 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int main(int ac , char **av)
     App app(800, 600, "SCOP - Logo 42");
     Shader shader("shaders/vertex.glsl", "shaders/fragment.glsl");
     Mesh mesh(av[1]);
-    float angle = 0.0f;
+    float rotation = 0.0f;
     while(app.isRunning())
     {
         app.processInput();
         app.clearScreen();
-        angle += 1.0f * app.getDeltaTime();
-        Mat4 model = Mat4::rotateY(angle);
+        rotation += 0.01f;
+        Mat4 model = Mat4::rotateY(rotation);
         Mat4 view = Mat4::translate(0.0f, 0.0f, -5.0f);
-        Mat4 projection = Mat4::perspective(45 * (M_PI / 250), app.getAspect(), 0.1f, 100.f);
+        Mat4 projection = Mat4::perspective(45 * (M_PI / 180), app.getAspect(), 0.1f, 100.f);
         Mat4 MVP = projection * view * model;
         shader.use();
         shader.setMat4("u_MVP", MVP);
