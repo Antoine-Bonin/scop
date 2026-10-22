@@ -6,7 +6,7 @@
 /*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 16:16:10 by antbonin          #+#    #+#             */
-/*   Updated: 2026/10/19 16:20:39 by antbonin         ###   ########.fr       */
+/*   Updated: 2026/10/22 13:53:37 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include <string>
 # include <Mat4.hpp>
 
+struct Vertex {
+	Vec3 pos;
+	float u, v;
+};
+
 class Mesh
 {
 public:
@@ -30,14 +35,17 @@ public:
 	
 private:
 
-	std::vector<Vec3> vertices;
+	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 
 	unsigned int VAO;
 	unsigned int VBO;
 	unsigned int EBO;
-
+	
+	Vec3	size;
+	
 	void	parseObj(const std::string &filePath);
+	void	generateUvs();
 	void	centerModel();
 	void	setupOpenGlBuffer();
 };
