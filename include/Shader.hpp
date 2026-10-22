@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Shader.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoine <antoine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/20 16:40:31 by antoine           #+#    #+#             */
-/*   Updated: 2026/10/20 18:52:05 by antoine          ###   ########.fr       */
+/*   Updated: 2026/10/22 14:33:21 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ public:
 	~Shader();
 
 	void	use() const;
+	void	setInt(const std::string& name, int value) const;
 	void	setFloat(const std::string& name, float value) const;
 	void	setMat4(const std::string& name, const Mat4& mat) const;
 private:
