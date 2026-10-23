@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Mat4.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antoine <antoine@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/20 16:33:16 by antoine           #+#    #+#             */
-/*   Updated: 2026/10/20 18:52:47 by antoine          ###   ########.fr       */
+/*   Updated: 2026/10/23 14:56:02 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ Mat4	Mat4::translate(float x, float y, float z) {
 	return result;
 }
 
+Mat4	Mat4::rotateX(float angle_rad) {
+	Mat4 result;
+	float c = std::cos(angle_rad);
+	float s = std::sin(angle_rad);
+	result.m[1][1] = c;
+	result.m[1][2] = -s;
+	result.m[2][1] = s;
+	result.m[2][2] = c;
+	return result;
+}
+
 Mat4	Mat4::rotateY(float angle_rad) {
 	Mat4 result;
 	float c = std::cos(angle_rad);
@@ -53,6 +64,17 @@ Mat4	Mat4::rotateY(float angle_rad) {
 	result.m[0][2] = s;
 	result.m[2][0] = -s;
 	result.m[2][2] = c;
+	return result;
+}
+
+Mat4	Mat4::rotateZ(float angle_rad) {
+	Mat4 result;
+	float c = std::cos(angle_rad);
+	float s = std::sin(angle_rad);
+	result.m[0][0] = c;
+	result.m[0][1] = -s;
+	result.m[1][0] = s;
+	result.m[1][1] = c;
 	return result;
 }
 
