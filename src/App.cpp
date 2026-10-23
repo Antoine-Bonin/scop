@@ -6,7 +6,7 @@
 /*   By: antbonin <antbonin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 16:56:11 by antbonin          #+#    #+#             */
-/*   Updated: 2026/10/21 18:56:00 by antbonin         ###   ########.fr       */
+/*   Updated: 2026/10/23 14:45:27 by antbonin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,25 @@ void	App::processInput()
 
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		 glfwSetWindowShouldClose(window, true);
+		 
+	input.move.x = keyValue(GLFW_KEY_D) - keyValue(GLFW_KEY_A);
+	input.move.y = keyValue(GLFW_KEY_W) - keyValue(GLFW_KEY_S);
+	input.move.z = keyValue(GLFW_KEY_F) - keyValue(GLFW_KEY_R);
+	
+	input.rotate.y = keyValue(GLFW_KEY_RIGHT) - keyValue(GLFW_KEY_LEFT);
+	input.rotate.x = keyValue(GLFW_KEY_DOWN)  - keyValue(GLFW_KEY_UP);
+	input.rotate.z = keyValue(GLFW_KEY_E)     - keyValue(GLFW_KEY_Q);
+	
+}
+
+const InputState&	App::getInput() const
+{
+	return input;
+}
+
+float	App::keyValue(int key) const
+{
+	return glfwGetKey(window, key) == GLFW_PRESS ? 1.0f : 0.0f;
 }
 
 void	App::clearScreen() const
